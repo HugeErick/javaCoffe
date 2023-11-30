@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bPlusTree/BPlusTree.iml" filepath="$PROJECT_DIR$/bPlusTree/BPlusTree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/act/act.iml" filepath="$PROJECT_DIR$/act/act.iml" />
+      <module fileurl="file://$PROJECT_DIR$/binaryTree/binaryTree.iml" filepath="$PROJECT_DIR$/binaryTree/binaryTree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dijkstra/dijkstra.iml" filepath="$PROJECT_DIR$/dijkstra/dijkstra.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/uni.iml" filepath="$PROJECT_DIR$/.idea/uni.iml" />
+    </modules>
+  </component>
+</project>
