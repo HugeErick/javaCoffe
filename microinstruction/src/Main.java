@@ -1,6 +1,6 @@
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         InputHandler inputHandler = new InputHandler();
-        inputHandler.writeInstruction();
+        System.out.println("hi");
     }
 }
