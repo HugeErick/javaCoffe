@@ -2,9 +2,11 @@ package core;
 
 import operandos.Destiny;
 import operandos.Source;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,24 +19,30 @@ public class InputHandler {
 
     public InputHandler() {
         writeInstruction();
-        String[] userTokens = tokenization(userInstruction);
-        handleCase(userTokens);
+        if (LoopMenu.dontQuitLoop) {
+            String[] userTokens = tokenization(userInstruction);
+            handleCase(userTokens);
+        }
     }
     private void writeInstruction() {
         System.out.println("Enter input:");
         userInstruction = scanner.nextLine();
-        System.out.println(userInstruction);
-        try {
-            String regex = "^[a-zA-Z0-9\\s]{1,21}$";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(userInstruction);
-            if (matcher.matches()) {
-                System.out.println("ok");
-            } else {
-                throw new Exception("input no ok");
+        if (Objects.equals(userInstruction, "!")) {
+            LoopMenu.dontQuitLoop = false;
+        } else {
+            try {
+                String regex = "^[a-zA-Z0-9\\s]{1,21}$";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(userInstruction);
+                if (matcher.matches()) {
+                    System.out.println("ok");
+                } else {
+                    System.out.println("found:" + userInstruction);
+                    throw new Exception("input no ok");
+                }
+            } catch (Exception e) {
+                System.out.println("Exception caught: " + e.getMessage());
             }
-        } catch (Exception e) {
-            System.out.println("Exception caught: " + e.getMessage());
         }
     }
 
@@ -125,7 +133,5 @@ public class InputHandler {
         getSource = null;
         return getSource;
     }
-
-
 
 }
