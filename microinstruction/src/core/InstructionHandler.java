@@ -3,64 +3,46 @@ package core;
 import operandos.Destiny;
 import operandos.Source;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputHandler {
-    private final Scanner scanner = new Scanner(System.in);
-    public String userInstruction;
-    public InputHandler() {
-        writeInstruction();
-        if (LoopMenu.dontQuitLoop) {
-            String[] userTokens = tokenization(userInstruction);
-            handleInstructionCase(userTokens);
-        }
-    }
-    private void writeInstruction() {
-        System.out.println("Enter input:");
-        userInstruction = scanner.nextLine();
-        if (Objects.equals(userInstruction, "!")) {
-            LoopMenu.dontQuitLoop = false;
-        } else {
-            try {
-                String regex = "^[a-zA-Z0-9\\s]{1,21}$";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(userInstruction);
-                if (matcher.matches()) {
-                    System.out.println("ok");
-                } else {
-                    System.out.println("found:" + userInstruction);
-                    throw new Exception("input no ok");
-                }
-            } catch (Exception e) {
-                System.out.println("Exception caught: " + e.getMessage());
-            }
+public class InstructionHandler {
+
+    protected static Queue<String> instructionQueue = new LinkedList<>();
+
+    protected Destiny destiny;
+    protected Source source;
+
+    public InstructionHandler(Queue<String> getInstruction) {
+        instructionQueue = getInstruction;
+        while (!instructionQueue.isEmpty()) {
+            String poppedInstruction = instructionQueue.poll();
+            handleCase(poppedInstruction);
         }
     }
 
-    private String @NotNull [] tokenization(@NotNull String input) {
-       String[] tokens = input.split("\\s+");
-       System.out.println(Arrays.toString(tokens));
-       return tokens;
-    }
-
-    private void handleInstructionCase(String @NotNull [] tokens) {
-        //checking if instruction is valid
+    public void handleCase(String instruction) {
+        String[] tokens = tokenization(instruction);
         switch (tokens[0]) {
-            case "load", "sub", "bneg", "store", "halt":
-                System.out.println("instruction");
-                break;
-            default:
-                System.out.println("invalid instruction");
-                break;
+            case "load":
+                destiny = handleDestinyIdentification(tokens);
+                source = handleSourceIdentification(tokens);
+                doOperation(destiny, source);
+            case "sub":
+
         }
+
+
     }
 
+    public String[] tokenization(String s) {
+        String[] tokens = s.split("\\s+");
+        System.out.println(Arrays.toString(tokens));
+        return tokens;
+    }
     private Destiny handleDestinyIdentification(String[] tokens) {
         Destiny getDestiny;
         String regex = "([rR]+)([0-3])";
@@ -117,4 +99,17 @@ public class InputHandler {
         return getSource;
     }
 
+    protected void doOperation(Destiny d, Source s){
+        if (d.isReg) {
+            //to register
+        } else {
+            //to memory
+        }
+
+        if (s.isReg) {
+            //from reg
+        } else {
+            //from reg
+        }
+    }
 }
