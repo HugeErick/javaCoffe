@@ -27,14 +27,12 @@ public class InstructionHandler {
     public void handleCase(String instruction) {
         String[] tokens = tokenization(instruction);
         switch (tokens[0]) {
-            case "load":
-                destiny = handleDestinyIdentification(tokens);
-                source = handleSourceIdentification(tokens);
-                doOperation(destiny, source);
-            case "sub":
-
+            case "load", "sub", "bneg", "store", "halt", "add", "or", "branch", "and":
+                break;
+            default:
+                System.out.println("invalid instruction");
+                break;
         }
-
 
     }
 

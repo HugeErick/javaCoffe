@@ -52,8 +52,7 @@ public class InputHandler {
     private void handleInstructionCase(String @NotNull [] tokens) {
         //checking if instruction is valid
         switch (tokens[0]) {
-            case "load", "sub", "bneg", "store", "halt":
-                System.out.println("instruction");
+            case "load", "sub", "bneg", "store", "halt", "add", "or", "branch", "and":
                 break;
             default:
                 System.out.println("invalid instruction");
