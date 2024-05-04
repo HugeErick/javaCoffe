@@ -1,3 +1,5 @@
+package Main;
+
 import java.sql.*;
 import java.io.*;
 import java.util.Properties;
@@ -6,7 +8,7 @@ public class TransactionMySQL {
 	Statement stmt;
 	BufferedReader in;
 
-	static final String PROPERTIES_FILE = "ponchito/src/db.properties";
+	static final String PROPERTIES_FILE = "ponchito/src/properties/db.properties";
 
 	public TransactionMySQL() throws Exception {
 
