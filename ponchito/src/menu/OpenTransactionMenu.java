@@ -1,5 +1,5 @@
 package menu;
-import Main.TransactionMySQL;
+import main.TransactionMySQL;
 import java.sql.SQLException;
 public class OpenTransactionMenu {
     public OpenTransactionMenu() throws Exception {
