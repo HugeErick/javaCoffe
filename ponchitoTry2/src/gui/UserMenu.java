@@ -5,16 +5,17 @@ import java.awt.*;
 
 public class UserMenu {
     public Window window;
-    protected static Gui gui;
+    protected Gui gui;
     public TransactionMySQL transactionMySQL;
     public String sharedDbUsername;
+    public String viewAs;
 
-    public UserMenu(Window window, Gui gui, TransactionMySQL transactionMySQL, String sharedDbUsername) {
+    public UserMenu(Window window, Gui gui, TransactionMySQL transactionMySQL, String sharedDbUsername, String viewAs) {
         this.window = window;
-        LoginPage.gui = gui;
+        this.gui = gui;
         this.transactionMySQL = transactionMySQL;
         this.sharedDbUsername = sharedDbUsername;
-
+        this.viewAs = viewAs;
         loadMenuScene();
     }
 
@@ -31,6 +32,12 @@ public class UserMenu {
         gridBagConstraints.anchor = GridBagConstraints.CENTER;
         window.add(centerPanel);
 
+        //add view as text
+        JLabel label = new JLabel("view as: " + viewAs);
+        centerPanel.add(label, gridBagConstraints);
+        gridBagConstraints.gridy++;
+
+
         //buttonPanel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -38,18 +45,7 @@ public class UserMenu {
         centerPanel.add(Box.createVerticalGlue(), gridBagConstraints);
         gridBagConstraints.gridy++;
 
-        // Add Show Circuits button
-        JButton showCircuitsButton = new JButton("Reserve trip");
-        showCircuitsButton.addActionListener(e -> {
-            // Handle Show Circuits button action here
-        });
-        //margin buttons
         Dimension buttonSizePreference = new Dimension(150, 35);
-        showCircuitsButton.setPreferredSize(buttonSizePreference);
-        showCircuitsButton.setMaximumSize(buttonSizePreference);
-        showCircuitsButton.setMinimumSize(buttonSizePreference);
-        buttonPanel.add(Box.createVerticalStrut(14));
-        buttonPanel.add(showCircuitsButton);
 
         // Add Query Options button
         JButton queryOptionsButton = new JButton("Make simulation");
@@ -67,7 +63,7 @@ public class UserMenu {
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> {
             this.window.dispose();
-            gui = new Gui(1, sharedDbUsername);
+            gui = new Gui(1, sharedDbUsername, null);
         });
         exitButton.setPreferredSize(buttonSizePreference);
         exitButton.setMaximumSize(buttonSizePreference);

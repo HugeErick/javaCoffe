@@ -8,16 +8,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Gui  {
-    protected int scene;
+    public int scene;
     private String dbPassword;
     private String dbUrl;
     private String dbUser;
     public String sharedDbUsername;
+    public String viewAs;
 
     TransactionMySQL transactionMySQL;
-    public Gui(int whatScene, String sharedDbUsername) {
+    public Gui(int whatScene, String sharedDbUsername, String viewAs) {
         this.sharedDbUsername = sharedDbUsername;
-
+        this.viewAs = viewAs;
         scene = whatScene;
         switch (scene) {
         case 0:
@@ -52,11 +53,12 @@ public class Gui  {
                 break;
             case 3:
                 Window window3 = new Window("Ponchito me la pela", 500, 500);
-                new EmployeeMenu(window3, this, transactionMySQL, sharedDbUsername);
+                new EmployeeMenu(window3, this, transactionMySQL, sharedDbUsername, viewAs);
                 break;
             case 4:
                 Window window4 = new Window("User view", 500, 500);
-                new UserMenu(window4, this, transactionMySQL, sharedDbUsername);
+                new UserMenu(window4, this, transactionMySQL, sharedDbUsername, viewAs);
+                break;
         default:
             System.out.println("no scene for this");
             System.exit(1);

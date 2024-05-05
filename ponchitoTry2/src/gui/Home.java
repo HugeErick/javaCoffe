@@ -56,7 +56,7 @@ public class Home {
         queryOptionsButton.addActionListener(e -> {
             // Handle Query Options button action here
             this.window.dispose();
-            gui = new Gui(2, sharedDbUsername);
+            gui = new Gui(2, sharedDbUsername, null);
         });
         queryOptionsButton.setPreferredSize(buttonSizePreference);
         queryOptionsButton.setMaximumSize(buttonSizePreference);

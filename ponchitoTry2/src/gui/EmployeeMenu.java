@@ -8,13 +8,14 @@ public class EmployeeMenu {
     protected static Gui gui;
     public TransactionMySQL transactionMySQL;
     public String sharedDbUsername;
+    public String viewAs;
 
-    public EmployeeMenu(Window window, Gui gui, TransactionMySQL transactionMySQL, String sharedDbUsername) {
+    public EmployeeMenu(Window window, Gui gui, TransactionMySQL transactionMySQL, String sharedDbUsername, String viewAs) {
         this.window = window;
         LoginPage.gui = gui;
         this.transactionMySQL = transactionMySQL;
         this.sharedDbUsername = sharedDbUsername;
-
+        this.viewAs = viewAs;
         loadMenuScene();
     }
 
@@ -30,6 +31,11 @@ public class EmployeeMenu {
         gridBagConstraints.weighty = 1;
         gridBagConstraints.anchor = GridBagConstraints.CENTER;
         window.add(centerPanel);
+
+        // add view as text
+        JLabel label = new JLabel("view as: " + viewAs);
+        centerPanel.add(label, gridBagConstraints);
+        gridBagConstraints.gridy++;
 
         //buttonPanel
         JPanel buttonPanel = new JPanel();
@@ -67,7 +73,7 @@ public class EmployeeMenu {
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> {
             this.window.dispose();
-            gui = new Gui(1, sharedDbUsername);
+            gui = new Gui(1, sharedDbUsername, null);
         });
         exitButton.setPreferredSize(buttonSizePreference);
         exitButton.setMaximumSize(buttonSizePreference);

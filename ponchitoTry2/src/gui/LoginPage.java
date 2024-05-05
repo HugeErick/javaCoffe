@@ -89,7 +89,7 @@ public class LoginPage {
                 IOe.printStackTrace();
             }
             this.window.dispose();
-            gui = new Gui(1, userField.getText());
+            gui = new Gui(1, userField.getText(), null);
         });
         return loginButton;
     }

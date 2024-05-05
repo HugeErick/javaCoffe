@@ -8,16 +8,17 @@ public class PrivilegeMultiplexor {
     protected Window window;
     public TransactionMySQL transactionMySQL;
     public String sharedDbUsername;
-
     public PrivilegeMultiplexor(Gui gui, Window window, TransactionMySQL transactionMySQL, String sharedDbUsername) {
         this.gui = gui;
         this.window = window;
         this.transactionMySQL = transactionMySQL;
-        sharedDbUsername = sharedDbUsername;
+        this.sharedDbUsername = sharedDbUsername;
         loadPrivilegeMultiplexorScene();
     }
 
     public void loadPrivilegeMultiplexorScene() {
+        String viewAsUser = "User";
+        String viewAsEmployee = "Employee";
         //centered panel
         JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setPreferredSize(new Dimension(400, 400));
@@ -36,14 +37,12 @@ public class PrivilegeMultiplexor {
         // Add some empty space above the buttonPanel to center vertically
         centerPanel.add(Box.createVerticalGlue(), gridBagConstraints);
         gridBagConstraints.gridy++;
-
         Dimension buttonSizePreference = new Dimension(150, 35);
 
-        // Add Query Options button
-        JButton userModeButton = new JButton("User");
+        JButton userModeButton = new JButton(viewAsUser);
         userModeButton.addActionListener(e -> {
             this.window.dispose();
-            gui = new Gui(4, sharedDbUsername);
+            gui = new Gui(4, sharedDbUsername, viewAsUser);
         });
         userModeButton.setPreferredSize(buttonSizePreference);
         userModeButton.setMaximumSize(buttonSizePreference);
@@ -52,12 +51,10 @@ public class PrivilegeMultiplexor {
         buttonPanel.add(Box.createVerticalStrut(14));
         buttonPanel.add(userModeButton);
 
-
-        // Add Query Options button
-        JButton employeeModeButton = new JButton("Employee");
+        JButton employeeModeButton = new JButton(viewAsEmployee);
         employeeModeButton.addActionListener(e -> {
             this.window.dispose();
-            gui = new Gui(3, sharedDbUsername);
+            this.gui = new Gui(3, sharedDbUsername, viewAsEmployee);
         });
         employeeModeButton.setPreferredSize(buttonSizePreference);
         employeeModeButton.setMaximumSize(buttonSizePreference);
@@ -66,19 +63,6 @@ public class PrivilegeMultiplexor {
         buttonPanel.add(Box.createVerticalStrut(14));
         buttonPanel.add(employeeModeButton);
 
-
-        // Add Query Options button
-        JButton devModeButton = new JButton("dev");
-        devModeButton.addActionListener(e -> {
-            this.window.dispose();
-            gui = new Gui(3, sharedDbUsername);
-        });
-        devModeButton.setPreferredSize(buttonSizePreference);
-        devModeButton.setMaximumSize(buttonSizePreference);
-        devModeButton.setMinimumSize(buttonSizePreference);
-        //margin buttons
-        buttonPanel.add(Box.createVerticalStrut(14));
-        buttonPanel.add(devModeButton);
 
         // Add buttonPanel to centerPanel
         centerPanel.add(buttonPanel, gridBagConstraints);
@@ -92,11 +76,7 @@ public class PrivilegeMultiplexor {
                         BorderFactory.createEmptyBorder(
                                 5,5,5,5)));
 
-
-
         window.pack();
         window.setVisible(true);
-
-
     }
 }

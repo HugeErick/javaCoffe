@@ -10,9 +10,9 @@ public class Main {
         String filePath = "ponchitoTry2/src/properties/db.properties";
         File file = new File(filePath);
         if (file.exists()) {
-            SwingUtilities.invokeLater(() -> new Gui(1, null));
+            SwingUtilities.invokeLater(() -> new Gui(1, null, null));
         } else {
-            SwingUtilities.invokeLater(() -> new Gui(0, null));
+            SwingUtilities.invokeLater(() -> new Gui(0, null, null));
         }
     }
 }
