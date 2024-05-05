@@ -77,16 +77,17 @@ public class LoginPage {
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(e -> {
             Properties properties = getProperties(databaseField, userField, passwordField);
-            this.window.dispose();
-            gui = new Gui(1);
+
 
             // Write properties to file
-            try (PrintWriter writer = new PrintWriter(new FileWriter("ponchitoTry2/src/properties/" + userField.getText() + "db.properties"))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("ponchitoTry2/src/properties/db.properties"))) {
                 properties.store(writer, null);
                 System.out.println("sampledb.properties file generated successfully.");
             } catch (IOException IOe) {
                 IOe.printStackTrace();
             }
+            this.window.dispose();
+            gui = new Gui(1);
         });
         return loginButton;
     }
