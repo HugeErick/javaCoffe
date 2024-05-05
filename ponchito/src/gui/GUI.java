@@ -1,5 +1,9 @@
 package gui;
 
+
+import login.User;
+import main.TransactionMySQL;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +11,7 @@ public class GUI  {
     public JPanel buttonPanel;
 
     public GUI() {
+        TransactionMySQL transactionMySQL = new TransactionMySQL();
         int numberOfButtonsAtStartMenu = 4;
 
         Window window = new Window("Ponchito me la pela", 500, 500);
@@ -36,6 +41,12 @@ public class GUI  {
         centerPanel.add(buttonPanel, gridBagConstraints);
         gridBagConstraints.gridy++;
         centerPanel.add(Box.createVerticalGlue(), gridBagConstraints);
+
+        centerPanel.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createTitledBorder(transactionMySQL.username),
+                        BorderFactory.createEmptyBorder(
+                                15,15,6,6)));
 
         // packing
         window.pack();

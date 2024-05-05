@@ -1,36 +1,42 @@
 package main;
 
+import login.User;
+
 import java.sql.*;
 import java.io.*;
-import java.util.Properties;
+
 public class TransactionMySQL {
 	public Connection conn;
 	Statement stmt;
 	BufferedReader in;
+	public String username = null;
 
-
-	static final String PROPERTIES_FILE = "ponchito/src/properties/erickdb.properties";
-
-	public TransactionMySQL() throws Exception {
-
-		Properties props = new Properties();
-		props.load(new FileInputStream(PROPERTIES_FILE));
-
-		// Extract properties
-		String url = props.getProperty("db.url");
-		String dbName = props.getProperty("db.name");
-		String user = props.getProperty("db.user");
-		String password = props.getProperty("db.password");
+	public TransactionMySQL() {
+		User user = new User();
+		username = user.getUser();
+		String completeUrl = user.getUrl() + user.getDbName();
 
 		System.out.print( "Connecting to the database... " );
 
 		// set up the connection with the DB
-		conn = DriverManager.getConnection( url+dbName, user, password );
-		System.out.println( "connected\n\n" );
+        try {
+            conn = DriverManager.getConnection( completeUrl, username, user.getPassword());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println( "connected\n\n" );
 
-		conn.setAutoCommit( false );         // inicio de la 1a transacción
-		stmt = conn.createStatement();
-		in = new BufferedReader( new InputStreamReader(System.in) );
+        try {
+            conn.setAutoCommit( false );         // inicio de la 1a transacción
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            stmt = conn.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        in = new BufferedReader( new InputStreamReader(System.in) );
 	}
 
 	public void dumpResultSet( ResultSet rset ) throws SQLException {
