@@ -1,6 +1,5 @@
 package gui;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,13 +9,14 @@ import java.util.regex.Pattern;
 
 public class Gui  {
     protected int scene;
-    private String dbName;
     private String dbPassword;
     private String dbUrl;
     private String dbUser;
+    public String sharedDbUsername;
 
     TransactionMySQL transactionMySQL;
-    public Gui(int whatScene) {
+    public Gui(int whatScene, String sharedDbUsername) {
+        this.sharedDbUsername = sharedDbUsername;
 
         scene = whatScene;
         switch (scene) {
@@ -28,7 +28,7 @@ public class Gui  {
             //autenticamos
             Properties properties = readPropertiesFile("ponchitoTry2/src/properties/db.properties");
             if (properties != null) {
-                dbName = properties.getProperty("db.name");
+                String dbName = properties.getProperty("db.name");
                 dbPassword = properties.getProperty("db.password");
                 dbUrl = properties.getProperty("db.url");
                 dbUser = properties.getProperty("db.user");
@@ -47,11 +47,16 @@ public class Gui  {
             new Home(window1, this, transactionMySQL);
             break;
             case 2:
-                Window window2 = new Window("Ponchito me la pela", 500, 500);
-                new Menu(window2, this, transactionMySQL);
+                Window window2 = new Window("View menu as", 500, 500);
+                new PrivilegeMultiplexor(this, window2, transactionMySQL, sharedDbUsername);
                 break;
             case 3:
+                Window window3 = new Window("Ponchito me la pela", 500, 500);
+                new EmployeeMenu(window3, this, transactionMySQL, sharedDbUsername);
                 break;
+            case 4:
+                Window window4 = new Window("User view", 500, 500);
+                new UserMenu(window4, this, transactionMySQL, sharedDbUsername);
         default:
             System.out.println("no scene for this");
             System.exit(1);

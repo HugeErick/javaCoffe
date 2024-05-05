@@ -18,6 +18,8 @@ public class LoginPage {
     }
     public void loadLoginScene () {
         JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setPreferredSize(new Dimension(400, 400));
+        centerPanel.setBackground(Color.gray);
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -87,7 +89,7 @@ public class LoginPage {
                 IOe.printStackTrace();
             }
             this.window.dispose();
-            gui = new Gui(1);
+            gui = new Gui(1, userField.getText());
         });
         return loginButton;
     }

@@ -3,21 +3,26 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu {
+public class UserMenu {
     public Window window;
     protected static Gui gui;
     public TransactionMySQL transactionMySQL;
+    public String sharedDbUsername;
 
-    public Menu(Window window, Gui gui, TransactionMySQL transactionMySQL) {
+    public UserMenu(Window window, Gui gui, TransactionMySQL transactionMySQL, String sharedDbUsername) {
         this.window = window;
         LoginPage.gui = gui;
         this.transactionMySQL = transactionMySQL;
+        this.sharedDbUsername = sharedDbUsername;
+
         loadMenuScene();
     }
 
     public void loadMenuScene() {
         //centered panel
         JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setPreferredSize(new Dimension(400, 400));
+        centerPanel.setBackground(Color.gray);
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -62,7 +67,7 @@ public class Menu {
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> {
             this.window.dispose();
-            gui = new Gui(1);
+            gui = new Gui(1, sharedDbUsername);
         });
         exitButton.setPreferredSize(buttonSizePreference);
         exitButton.setMaximumSize(buttonSizePreference);
@@ -79,11 +84,11 @@ public class Menu {
 
         // Add some empty space below the buttonPanel
         centerPanel.add(Box.createVerticalGlue(), gridBagConstraints);
-        centerPanel.setBorder(
+        buttonPanel.setBorder(
                 BorderFactory.createCompoundBorder(
-                        BorderFactory.createTitledBorder("lol"),
+                        BorderFactory.createTitledBorder(sharedDbUsername),
                         BorderFactory.createEmptyBorder(
-                                15,15,15,15)));
+                                5,5,5,5)));
 
 
 

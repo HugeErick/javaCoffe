@@ -1,27 +1,24 @@
 package gui;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.Vector;
 
-public class Home {
-    protected Window window;
-    protected Gui gui;
-    public  TransactionMySQL transactionMySQL;
+public class EmployeeMenu {
+    public Window window;
+    protected static Gui gui;
+    public TransactionMySQL transactionMySQL;
     public String sharedDbUsername;
 
-    public Home(Window window, Gui gui, TransactionMySQL transactionMySQL) {
+    public EmployeeMenu(Window window, Gui gui, TransactionMySQL transactionMySQL, String sharedDbUsername) {
         this.window = window;
-        this.gui = gui;
+        LoginPage.gui = gui;
         this.transactionMySQL = transactionMySQL;
-        sharedDbUsername = transactionMySQL.username;
-        loadHomeScene();
+        this.sharedDbUsername = sharedDbUsername;
+
+        loadMenuScene();
     }
-    public void loadHomeScene() {
+
+    public void loadMenuScene() {
         //centered panel
         JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setPreferredSize(new Dimension(400, 400));
@@ -42,7 +39,10 @@ public class Home {
         gridBagConstraints.gridy++;
 
         // Add Show Circuits button
-        JButton showCircuitsButton = getjButton();
+        JButton showCircuitsButton = new JButton("Reserve trip");
+        showCircuitsButton.addActionListener(e -> {
+            // Handle Show Circuits button action here
+        });
         //margin buttons
         Dimension buttonSizePreference = new Dimension(150, 35);
         showCircuitsButton.setPreferredSize(buttonSizePreference);
@@ -52,11 +52,9 @@ public class Home {
         buttonPanel.add(showCircuitsButton);
 
         // Add Query Options button
-        JButton queryOptionsButton = new JButton("Query Options");
+        JButton queryOptionsButton = new JButton("Make simulation");
         queryOptionsButton.addActionListener(e -> {
             // Handle Query Options button action here
-            this.window.dispose();
-            gui = new Gui(2, sharedDbUsername);
         });
         queryOptionsButton.setPreferredSize(buttonSizePreference);
         queryOptionsButton.setMaximumSize(buttonSizePreference);
@@ -68,7 +66,8 @@ public class Home {
         // Add Exit button
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> {
-            System.exit(0); // For simplicity, exiting the application
+            this.window.dispose();
+            gui = new Gui(1, sharedDbUsername);
         });
         exitButton.setPreferredSize(buttonSizePreference);
         exitButton.setMaximumSize(buttonSizePreference);
@@ -87,7 +86,7 @@ public class Home {
         centerPanel.add(Box.createVerticalGlue(), gridBagConstraints);
         buttonPanel.setBorder(
                 BorderFactory.createCompoundBorder(
-                        BorderFactory.createTitledBorder(transactionMySQL.username),
+                        BorderFactory.createTitledBorder(sharedDbUsername),
                         BorderFactory.createEmptyBorder(
                                 5,5,5,5)));
 
@@ -96,56 +95,4 @@ public class Home {
         window.pack();
         window.setVisible(true);
     }
-
-    private JButton getjButton() {
-        JButton showCircuitsButton = new JButton("Show Circuits");
-        showCircuitsButton.addActionListener(e -> {
-            //show query table in new Jframe
-            try {
-                ResultSet resultSet;
-                try {
-                    resultSet = transactionMySQL.executeQuery("select * from Ciudad");
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                // Create a new JFrame to display the query results
-                JFrame resultFrame = new JFrame("Query Results");
-                JTable table = new JTable(buildTableModel(resultSet));
-                JScrollPane scrollPane = new JScrollPane(table);
-                resultFrame.add(scrollPane);
-                resultFrame.pack();
-                resultFrame.setVisible(true);
-
-                transactionMySQL.close(); // Close the connection
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        });
-        return showCircuitsButton;
-    }
-
-    public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
-        ResultSetMetaData metaData = rs.getMetaData();
-
-        // Names of columns
-        Vector<String> columnNames = new Vector<>();
-        int columnCount = metaData.getColumnCount();
-        for (int column = 1; column <= columnCount; column++) {
-            columnNames.add(metaData.getColumnName(column));
-        }
-
-        // Data of the table
-        Vector<Vector<Object>> data = new Vector<>();
-        while (rs.next()) {
-            Vector<Object> row = new Vector<>();
-            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-                row.add(rs.getObject(columnIndex));
-            }
-            data.add(row);
-        }
-
-        return new DefaultTableModel(data, columnNames);
-    }
-
 }
