@@ -34,6 +34,9 @@ public class TransactionMySQL {
         in = new BufferedReader( new InputStreamReader(System.in) );
     }
 
+    public ResultSet executeQuery(String query) throws SQLException {
+        return stmt.executeQuery(query);
+    }
     public void dumpResultSet( ResultSet rset ) throws SQLException {
 
         ResultSetMetaData rsetmd = rset.getMetaData();

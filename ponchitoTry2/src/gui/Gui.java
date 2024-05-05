@@ -14,6 +14,8 @@ public class Gui  {
     private String dbPassword;
     private String dbUrl;
     private String dbUser;
+
+    TransactionMySQL transactionMySQL;
     public Gui(int whatScene) {
 
         scene = whatScene;
@@ -40,10 +42,16 @@ public class Gui  {
                 System.err.println("Failed to read properties file.");
             }
             //comenzamos transaccion
-            TransactionMySQL transactionMySQL = new TransactionMySQL(dbUrl, dbUser, dbPassword);
+            transactionMySQL = new TransactionMySQL(dbUrl, dbUser, dbPassword);
             Window window1 = new Window("Ponchito me la pela", 500, 500);
-            new Home(window1, this);
+            new Home(window1, this, transactionMySQL);
             break;
+            case 2:
+                Window window2 = new Window("Ponchito me la pela", 500, 500);
+                new Menu(window2, this, transactionMySQL);
+                break;
+            case 3:
+                break;
         default:
             System.out.println("no scene for this");
             System.exit(1);
