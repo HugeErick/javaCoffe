@@ -1,6 +1,7 @@
 package main;
 
 import login.User;
+import gui.*;
 
 import java.sql.*;
 import java.io.*;
@@ -9,10 +10,14 @@ public class TransactionMySQL {
 	public Connection conn;
 	Statement stmt;
 	BufferedReader in;
-	public String username = null;
+	public String username;
+	protected GUI gui;
 
-	public TransactionMySQL() {
-		User user = new User();
+
+
+	public TransactionMySQL(GUI gui) {
+		this.gui = gui;
+		User user = new User(gui, true);
 		username = user.getUser();
 		String completeUrl = user.getUrl() + user.getDbName();
 
@@ -145,6 +150,5 @@ public class TransactionMySQL {
 
 		return true;
 	}
-
 
 }

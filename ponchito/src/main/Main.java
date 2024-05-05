@@ -1,12 +1,15 @@
 package main;
+import gui.ButtonHandler;
 import gui.GUI;
-//import menu.OpenTransactionMenu;
 
 import javax.swing.*;
 
 public class Main {
+    public static TransactionMySQL transactionMySQL;
+    protected static GUI gui;
+    protected static ButtonHandler buttonHandler;
     public static void main(String[] arg) {
-        SwingUtilities.invokeLater(GUI::new);
-//        new OpenTransactionMenu();
+        transactionMySQL = new TransactionMySQL(gui);
+        SwingUtilities.invokeLater(() -> new GUI(1));
     }
 }
