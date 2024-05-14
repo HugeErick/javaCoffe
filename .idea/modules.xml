@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/connectMaria/connectMaria.iml" filepath="$PROJECT_DIR$/connectMaria/connectMaria.iml" />
       <module fileurl="file://$PROJECT_DIR$/dijkstra/dijkstra.iml" filepath="$PROJECT_DIR$/dijkstra/dijkstra.iml" />
       <module fileurl="file://$PROJECT_DIR$/microinstruction/microinstruction.iml" filepath="$PROJECT_DIR$/microinstruction/microinstruction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modern/modern.iml" filepath="$PROJECT_DIR$/modern/modern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modern2.iml" filepath="$PROJECT_DIR$/modern2.iml" />
       <module fileurl="file://$PROJECT_DIR$/ponchito/ponchito.iml" filepath="$PROJECT_DIR$/ponchito/ponchito.iml" />
       <module fileurl="file://$PROJECT_DIR$/ponchitoTry2/ponchitoTry2.iml" filepath="$PROJECT_DIR$/ponchitoTry2/ponchitoTry2.iml" />
       <module fileurl="file://$PROJECT_DIR$/quickGraphic/quickGraphic.iml" filepath="$PROJECT_DIR$/quickGraphic/quickGraphic.iml" />
