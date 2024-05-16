@@ -4,11 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class GamePanel extends JPanel implements Runnable {
-    private BufferedImage bufferedScreen;
+public class MainPanel extends JPanel implements Runnable {
     protected Graphics2D g2;
     public boolean fullScreenOn;
-
     private final int screenWidth = 700;
     private final int screenHeight = 400;
     public int screenWidthForMax = screenWidth;
@@ -16,22 +14,24 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
     final int fps = 60;
-    public GamePanel() {
+
+    public MainPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black); //CHANGE COLOR!!
+        this.setBackground(new Color(11, 11, 11)); //CHANGE COLOR!!
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        this.setLayout(gridBagLayout);
     }
 
     public void setFullScreen() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice gd = ge.getDefaultScreenDevice();
-        gd.setFullScreenWindow(StartGame.window);
+        gd.setFullScreenWindow(StartGui.window);
 
-        screenWidthForMax = StartGame.window.getWidth();
-        screenHeightForMax = StartGame.window.getHeight();
+        screenWidthForMax = StartGui.window.getWidth();
+        screenHeightForMax = StartGui.window.getHeight();
     }
-
 
     @Override
     public void run() {
@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             if (delta >= 1) {
                 //update();
-                draw();
+                //draw();
                 delta--;
                 drawCount++;
             }
@@ -65,21 +65,13 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setUpGame() {
-        bufferedScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
-        g2 = (Graphics2D)bufferedScreen.getGraphics();
+        BufferedImage bufferedScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+        g2 = (Graphics2D) bufferedScreen.getGraphics();
 
         if (fullScreenOn)
             setFullScreen();
     }
-    public void draw() {
-        //drawMisc();
-        drawToScreen();
-    }
 
-    public void drawToScreen() {
-        Graphics g = getGraphics();
-        g.drawImage(bufferedScreen, 0, 0, screenWidthForMax, screenHeightForMax, null);
-    }
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();

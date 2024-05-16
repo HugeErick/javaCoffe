@@ -1,26 +1,21 @@
 package pages;
 
-import main.GamePanel;
+import main.MainPanel;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Logic {
     public Logic(JFrame window) {
-        GamePanel gamePanel = new GamePanel();
-        LoginPage loginPage = new LoginPage(new Dimension(gamePanel.screenWidthForMax, gamePanel.screenHeightForMax));
-        window.add(gamePanel);
-
-        if (gamePanel.fullScreenOn)
+        MainPanel mainPanel = new MainPanel();
+        LoginPage loginPage = new LoginPage(mainPanel);
+        window.add(mainPanel);
+        window.add(loginPage);
+        if (mainPanel.fullScreenOn) {
             window.setUndecorated(true);
-
-        gamePanel.add(loginPage);
+        }
         window.pack();
 
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-
-        gamePanel.setUpGame();
-        gamePanel.startGameThread();
+        mainPanel.setUpGame();
+        mainPanel.startGameThread();
     }
 }

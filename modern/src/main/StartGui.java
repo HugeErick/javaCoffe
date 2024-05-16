@@ -1,14 +1,13 @@
 package main;
 
 import dbConn.Connect;
-import pages.Logic;
 
 import javax.swing.*;
 
-public class StartGame {
+public class StartGui {
     public static JFrame window;
 
-    public StartGame() {
+    public StartGui() {
 
         new Connect();
 
@@ -17,7 +16,7 @@ public class StartGame {
         window.setResizable(true);
         window.setTitle("GUI skeleton");
 
-        new Logic(window);
+        new WindowManager(window);
 
     }
 }

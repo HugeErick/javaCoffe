@@ -5,18 +5,23 @@ import java.awt.*;
 
 public class ButtonPanel extends JPanel {
     public JPanel obtainedResult;
-    private final GridBagConstraints gridBagConstraints;
-    public ButtonPanel(int numButtons, String[] buttonTitle) {
-        this.setPreferredSize(new Dimension(100, 200));
-        this.setBackground(Color.CYAN);
+
+    public ButtonPanel(JPanel father) {
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        this.setBackground(father.getBackground());
+        this.setLayout(gridBagLayout);
 
         obtainedResult = new JPanel(new GridBagLayout());
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.weightx = 1;
-        gridBagConstraints.weighty = 1;
-        gridBagConstraints.anchor = GridBagConstraints.CENTER;
+        iconButton();
+
+        this.add(obtainedResult);
+    }
+    public ButtonPanel(int numButtons, String[] buttonTitle, JPanel father) {
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        this.setBackground(father.getBackground());
+        this.setLayout(gridBagLayout);
+
+        obtainedResult = new JPanel(new GridBagLayout());
 
         this.add(obtainedResult);
 
@@ -34,6 +39,12 @@ public class ButtonPanel extends JPanel {
         } else {
             buttonA = new JButton("Button A");
         }
-        obtainedResult.add(buttonA, gridBagConstraints);
+        obtainedResult.add(buttonA);
+    }
+
+    private void iconButton() {
+        JButton button = new JButton();
+        button.setPreferredSize(new Dimension(40, 40));
+        obtainedResult.add(button);
     }
 }
