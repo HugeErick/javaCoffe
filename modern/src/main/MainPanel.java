@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 
 public class MainPanel extends JPanel implements Runnable {
     protected Graphics2D g2;
-    public boolean fullScreenOn;
     private final int screenWidth = 700;
     private final int screenHeight = 400;
     public int screenWidthForMax = screenWidth;
@@ -17,20 +16,12 @@ public class MainPanel extends JPanel implements Runnable {
 
     public MainPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(new Color(11, 11, 11)); //CHANGE COLOR!!
+        Color night = new Color(11, 11, 11);
+        this.setBackground(night);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         GridBagLayout gridBagLayout = new GridBagLayout();
         this.setLayout(gridBagLayout);
-    }
-
-    public void setFullScreen() {
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-        gd.setFullScreenWindow(StartGui.window);
-
-        screenWidthForMax = StartGui.window.getWidth();
-        screenHeightForMax = StartGui.window.getHeight();
     }
 
     @Override
@@ -67,9 +58,6 @@ public class MainPanel extends JPanel implements Runnable {
     public void setUpGame() {
         BufferedImage bufferedScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D) bufferedScreen.getGraphics();
-
-        if (fullScreenOn)
-            setFullScreen();
     }
 
     public void startGameThread() {

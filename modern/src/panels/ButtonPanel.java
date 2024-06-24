@@ -1,50 +1,39 @@
 package panels;
 
+import graphix.RoundedBorder;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ButtonPanel extends JPanel {
     public JPanel obtainedResult;
+    protected Color panelColor;
 
-    public ButtonPanel(JPanel father) {
+
+    public ButtonPanel(JPanel father, int iconCase) {
         GridBagLayout gridBagLayout = new GridBagLayout();
-        this.setBackground(father.getBackground());
+        panelColor = father.getBackground();
+        this.setBackground(panelColor);
         this.setLayout(gridBagLayout);
 
         obtainedResult = new JPanel(new GridBagLayout());
-        iconButton();
+        iconButton(iconCase);
 
         this.add(obtainedResult);
     }
-    public ButtonPanel(int numButtons, String[] buttonTitle, JPanel father) {
-        GridBagLayout gridBagLayout = new GridBagLayout();
-        this.setBackground(father.getBackground());
-        this.setLayout(gridBagLayout);
 
-        obtainedResult = new JPanel(new GridBagLayout());
-
-        this.add(obtainedResult);
-
-        if (numButtons == 1)
-            oneButtonPanel(buttonTitle);
-        else if (numButtons == 2) {
-            ;
-        }
-    }
-
-    private void oneButtonPanel(String[] buttonsTitles) {
-        JButton buttonA;
-        if (!buttonsTitles[0].isEmpty()) {
-            buttonA = new JButton(buttonsTitles[0]);
-        } else {
-            buttonA = new JButton("Button A");
-        }
-        obtainedResult.add(buttonA);
-    }
-
-    private void iconButton() {
+    private void iconButton(int iconCase) {
         JButton button = new JButton();
         button.setPreferredSize(new Dimension(40, 40));
+        button.setBackground(panelColor);
+        button.setBorder(new RoundedBorder(20));
+        switch (iconCase) {
+            case 0:
+                //Register Icon;
+            case 1:
+                //Readme Icon;
+        }
         obtainedResult.add(button);
     }
+
 }

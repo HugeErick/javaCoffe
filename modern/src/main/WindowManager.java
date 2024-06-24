@@ -1,6 +1,6 @@
 package main;
 
-import pages.Logic;
+import pages.LogicOfPages;
 
 import javax.swing.*;
 
@@ -8,7 +8,8 @@ public class WindowManager {
     public WindowManager(JFrame window) {
         window.setResizable(false);
         window.setVisible(true);
-        new Logic(window);
+
+        new LogicOfPages(window);
         window.setLocationRelativeTo(null);
     }
 }

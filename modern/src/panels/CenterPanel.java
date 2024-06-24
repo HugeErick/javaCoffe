@@ -4,13 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CenterPanel extends JPanel {
-    private int cornerRadius;
+    private final int cornerRadius;
 
-    public CenterPanel(int radius, Dimension dimension) {
+    public CenterPanel(int radius) {
         super();
         this.cornerRadius = radius;
         this.setOpaque(false);
-        this.setBackground(new Color(92, 128, 160));
+        Color airForceBlue = new Color(92, 128, 160);
+        this.setBackground(airForceBlue);
         this.setLayout(new GridBagLayout());
     }
 

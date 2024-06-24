@@ -9,6 +9,7 @@ public class StartGui {
 
     public StartGui() {
 
+        //db connection
         new Connect();
 
         window = new JFrame();

@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/bPlusTree/BPlusTree.iml" filepath="$PROJECT_DIR$/bPlusTree/BPlusTree.iml" />
       <module fileurl="file://$PROJECT_DIR$/act/act.iml" filepath="$PROJECT_DIR$/act/act.iml" />
-      <module fileurl="file://$PROJECT_DIR$/binaryTree/binaryTree.iml" filepath="$PROJECT_DIR$/binaryTree/binaryTree.iml" />
-      <module fileurl="file://$PROJECT_DIR$/connectMaria/connectMaria.iml" filepath="$PROJECT_DIR$/connectMaria/connectMaria.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dijkstra/dijkstra.iml" filepath="$PROJECT_DIR$/dijkstra/dijkstra.iml" />
       <module fileurl="file://$PROJECT_DIR$/microinstruction/microinstruction.iml" filepath="$PROJECT_DIR$/microinstruction/microinstruction.iml" />
       <module fileurl="file://$PROJECT_DIR$/modern/modern.iml" filepath="$PROJECT_DIR$/modern/modern.iml" />
-      <module fileurl="file://$PROJECT_DIR$/modern2.iml" filepath="$PROJECT_DIR$/modern2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ponchito/ponchito.iml" filepath="$PROJECT_DIR$/ponchito/ponchito.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ponchitoTry2/ponchitoTry2.iml" filepath="$PROJECT_DIR$/ponchitoTry2/ponchitoTry2.iml" />
       <module fileurl="file://$PROJECT_DIR$/quickGraphic/quickGraphic.iml" filepath="$PROJECT_DIR$/quickGraphic/quickGraphic.iml" />
-      <module fileurl="file://$PROJECT_DIR$/temp/temp.iml" filepath="$PROJECT_DIR$/temp/temp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/uni.iml" filepath="$PROJECT_DIR$/.idea/uni.iml" />
     </modules>
   </component>

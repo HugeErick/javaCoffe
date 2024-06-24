@@ -9,6 +9,9 @@ import panels.RightSidePanel;
 import javax.swing.*;
 import java.awt.*;
 
+import static graphix.icons.IconsMultiplexor.getReadMeIcon;
+import static graphix.icons.IconsMultiplexor.getRegisterIcon;
+
 public class LoginPage extends JPanel {
     private final Dimension loginPageDimension;
     private final int ymargin = 20;
@@ -29,21 +32,20 @@ public class LoginPage extends JPanel {
         // left panel
         LeftSidePanel leftSidePanel = new LeftSidePanel(this, dimension);
         this.add(leftSidePanel, leftPanelConstrains());
-        addIcon(leftSidePanel);
+        addIcon(leftSidePanel, getRegisterIcon());
 
         //center & button panel
-        CenterPanel centerPanel = new CenterPanel(30, dimension);
-//        centerPanel.setPreferredSize(new Dimension(sidePanelWidth, loginPageDimension.height));
+        CenterPanel centerPanel = new CenterPanel(30);
         this.add(centerPanel, centerPanelConstrains());
 
         //right side panel
         RightSidePanel rightSidePanel = new RightSidePanel(this, dimension);
         this.add(rightSidePanel, rightPanelConstrains());
-        addIcon(rightSidePanel);
+        addIcon(rightSidePanel, getReadMeIcon());
     }
 
-    private void addIcon(JPanel panel) {
-        ButtonPanel sampleButton = new ButtonPanel(panel);
+    private void addIcon(JPanel panel, int iconCase) {
+        ButtonPanel sampleButton = new ButtonPanel(panel, iconCase);
         panel.add(sampleButton, iconLayoutConstrains());
     }
 
@@ -64,7 +66,7 @@ public class LoginPage extends JPanel {
         rightPanelConstrains.fill = GridBagConstraints.BOTH;
         rightPanelConstrains.gridx = 3;
         rightPanelConstrains.gridy = 0;
-        rightPanelConstrains.weightx = 0.1;
+        rightPanelConstrains.weightx = 0.2;
         rightPanelConstrains.weighty = 1.0;
         rightPanelConstrains.insets = new Insets(ymargin, 0, ymargin, xmargin);
         return rightPanelConstrains;
@@ -75,7 +77,7 @@ public class LoginPage extends JPanel {
         leftPanelConstrains.fill = GridBagConstraints.BOTH;
         leftPanelConstrains.gridx = 1;
         leftPanelConstrains.gridy = 0;
-        leftPanelConstrains.weightx = 0.1;
+        leftPanelConstrains.weightx = 0.2;
         leftPanelConstrains.weighty = 1.0;
         leftPanelConstrains.insets = new Insets(ymargin, xmargin, ymargin, 0);
         return leftPanelConstrains;
